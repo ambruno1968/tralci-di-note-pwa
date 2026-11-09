@@ -1,0 +1,799 @@
+{
+  "students": [
+    {
+      "id": "6f8137de-df93-4420-8546-9bdbc0304f32",
+      "nome": "Giada",
+      "cognome": "Lepore",
+      "strumento": "Canto",
+      "giorno": "Venerdì",
+      "orario": "16:00 – 16:45",
+      "email": "giadaalbalepore4@gmail.com",
+      "telefono": "3518271697",
+      "intestatario": "Caterina Capuano",
+      "retta": 60,
+      "stato": "Attivo",
+      "note": "",
+      "dataIscrizione": "2026-10-01",
+      "dataNascita": "2009-01-08"
+    },
+    {
+      "id": "972a4538-5c3b-4ca4-b6fd-cf791a4e591c",
+      "nome": "Martina",
+      "cognome": "Valastro",
+      "strumento": "Chitarra",
+      "giorno": "Venerdì",
+      "orario": "16:45 – 17:30",
+      "email": "segreteria.valastro@libero.it",
+      "telefono": "3760084694",
+      "intestatario": "Conte Sabina",
+      "retta": 60,
+      "stato": "Attivo",
+      "note": "",
+      "dataIscrizione": "2026-10-01",
+      "dataNascita": "2011-04-29"
+    },
+    {
+      "id": "a9a4eb23-8fc0-49fa-a06b-5dfdcc5c3181",
+      "nome": "Giovanni",
+      "cognome": "Valastro",
+      "strumento": "Basso",
+      "giorno": "Venerdì",
+      "orario": "17:30 – 18:15",
+      "email": "segreteria.valastro@libero.it",
+      "telefono": "3760084699",
+      "intestatario": "Conte Sabina",
+      "retta": 60,
+      "stato": "Sospeso",
+      "note": "",
+      "dataIscrizione": "2026-10-01",
+      "dataNascita": "2009-04-10"
+    },
+    {
+      "id": "a9233c50-3fd7-4c59-8a13-16b27a8b74a8",
+      "nome": "Daniel",
+      "cognome": "Astemio",
+      "strumento": "Canto",
+      "giorno": "Venerdì",
+      "orario": "18:15 – 19:00",
+      "email": "astemio.daniel@gmail.com",
+      "telefono": "3461058764",
+      "intestatario": "",
+      "retta": 60,
+      "stato": "Attivo",
+      "note": "",
+      "dataIscrizione": "2026-10-01",
+      "dataNascita": "1997-04-24"
+    },
+    {
+      "id": "8e2cd44d-7234-45c6-bb78-969e5d69b6cc",
+      "nome": "Francesco",
+      "cognome": "Parisi",
+      "strumento": "Chitarra",
+      "giorno": "Sabato",
+      "orario": "09:00 – 09:45",
+      "email": "francesco2000parisi@gmail.com",
+      "telefono": "3479862987",
+      "intestatario": "",
+      "retta": 60,
+      "stato": "Attivo",
+      "note": "",
+      "dataIscrizione": "2026-10-01",
+      "dataNascita": "2000-01-01"
+    },
+    {
+      "id": "22a6d2cf-78e2-473a-8b4a-ecace322892a",
+      "nome": "Melly",
+      "cognome": "Astemio",
+      "strumento": "Basso",
+      "giorno": "Sabato",
+      "orario": "09:45 – 10:30",
+      "email": "astemio.melodie@gmail.com",
+      "telefono": "3208522745",
+      "intestatario": "",
+      "retta": 60,
+      "stato": "Attivo",
+      "note": "",
+      "dataIscrizione": "2026-10-01",
+      "dataNascita": "2001-07-05"
+    },
+    {
+      "id": "893b8d4b-d533-49c7-9df7-6a75b226e06e",
+      "nome": "Evan",
+      "cognome": "Astemio",
+      "strumento": "Piano",
+      "giorno": "Sabato",
+      "orario": "10:30 – 11:15",
+      "email": "eastemio@gmail.com",
+      "telefono": "3755206105",
+      "intestatario": "Bruno Astemio",
+      "retta": 60,
+      "stato": "Attivo",
+      "note": "",
+      "dataIscrizione": "2026-10-01",
+      "dataNascita": "2009-01-14"
+    },
+    {
+      "id": "077d1508-ecca-4c9f-9808-466415df6cc4",
+      "nome": "Laura",
+      "cognome": "Rios",
+      "strumento": "Canto",
+      "giorno": "Sabato",
+      "orario": "11:15 – 12:00",
+      "email": "laurariosmera95@gmail.com",
+      "telefono": "3446274581",
+      "intestatario": "",
+      "retta": 60,
+      "stato": "Attivo",
+      "note": "",
+      "dataIscrizione": "2026-10-01",
+      "dataNascita": "1995-02-18"
+    },
+    {
+      "id": "90676fca-f5a4-453a-b5f1-2d4ea2b6c8bb",
+      "nome": "Emanuele",
+      "cognome": "Silvestro",
+      "strumento": "Chitarra",
+      "giorno": "Sabato",
+      "orario": "12:00 – 12:45",
+      "email": "manusilvestro@gmail.com",
+      "telefono": "3347358522",
+      "intestatario": "",
+      "retta": 60,
+      "stato": "Attivo",
+      "note": "",
+      "dataIscrizione": "2026-10-01",
+      "dataNascita": "2000-04-05"
+    },
+    {
+      "id": "afec4b22-c75b-4cfa-b90b-2cb387b7d48b",
+      "nome": "Vincenzo",
+      "cognome": "Parisi",
+      "strumento": "Piano",
+      "giorno": "Sabato",
+      "orario": "12:45 – 13:30",
+      "email": "vincenzopa03@gmail.com",
+      "telefono": "3513713734",
+      "intestatario": "",
+      "retta": 60,
+      "stato": "Attivo",
+      "note": "",
+      "dataIscrizione": "2026-10-01",
+      "dataNascita": "2003-08-03"
+    },
+    {
+      "id": "003b6012-18e7-4df0-b136-83d8989a34bc",
+      "nome": "Larissa",
+      "cognome": "Famà",
+      "strumento": "Piano",
+      "giorno": "Sabato",
+      "orario": "13:30 – 14:15",
+      "email": "larissafama2005@icloud.com",
+      "telefono": "3774589890",
+      "intestatario": "",
+      "retta": 60,
+      "stato": "Attivo",
+      "note": "",
+      "dataIscrizione": "2026-10-01",
+      "dataNascita": "2005-10-24"
+    }
+  ],
+  "payments": [
+    {
+      "id": "77cd7fe5-031b-43cc-b64b-137b147d6ecb",
+      "studentId": "6f8137de-df93-4420-8546-9bdbc0304f32",
+      "mese": "2026-10",
+      "importo": 60,
+      "data": "2026-10-02",
+      "metodo": "Contanti",
+      "note": "",
+      "numero": 1,
+      "anno": 2026,
+      "emailInviata": {
+        "data": "2026-10-08T21:06:16.599Z",
+        "to": "bastemio@gmail.com"
+      },
+      "creato": "2026-10-06T10:01:44.362Z",
+      "teacherPaymentId": "063a9f05-b219-4e83-9e89-34644ddbffe4",
+      "teacherPaymentNumero": 1
+    },
+    {
+      "id": "74d1430e-9c86-40fa-bc32-97adb15511cc",
+      "studentId": "972a4538-5c3b-4ca4-b6fd-cf791a4e591c",
+      "mese": "2026-10",
+      "importo": 60,
+      "data": "2026-10-01",
+      "metodo": "Contanti",
+      "note": "",
+      "numero": 2,
+      "anno": 2026,
+      "emailInviata": {
+        "data": "2026-10-08T21:06:12.413Z",
+        "to": "bastemio@gmail.com"
+      },
+      "creato": "2026-10-06T10:01:44.364Z",
+      "teacherPaymentId": "063a9f05-b219-4e83-9e89-34644ddbffe4",
+      "teacherPaymentNumero": 1
+    },
+    {
+      "id": "0c6f1e0f-532d-4e60-b02b-7eefd853f708",
+      "studentId": "a9a4eb23-8fc0-49fa-a06b-5dfdcc5c3181",
+      "mese": "2026-10",
+      "importo": 60,
+      "data": "2026-10-01",
+      "metodo": "Contanti",
+      "note": "",
+      "numero": 3,
+      "anno": 2026,
+      "emailInviata": {
+        "data": "2026-10-08T21:06:07.860Z",
+        "to": "bastemio@gmail.com"
+      },
+      "creato": "2026-10-06T10:01:44.364Z",
+      "teacherPaymentId": "063a9f05-b219-4e83-9e89-34644ddbffe4",
+      "teacherPaymentNumero": 1
+    },
+    {
+      "id": "e40e6add-a0f1-4da6-b945-ef579db4666a",
+      "studentId": "a9233c50-3fd7-4c59-8a13-16b27a8b74a8",
+      "mese": "2026-10",
+      "importo": 60,
+      "data": "2026-10-01",
+      "metodo": "Contanti",
+      "note": "",
+      "numero": 4,
+      "anno": 2026,
+      "emailInviata": {
+        "data": "2026-10-08T21:06:03.095Z",
+        "to": "bastemio@gmail.com"
+      },
+      "creato": "2026-10-06T10:01:44.364Z",
+      "teacherPaymentId": "063a9f05-b219-4e83-9e89-34644ddbffe4",
+      "teacherPaymentNumero": 1
+    },
+    {
+      "id": "0e0a8dd4-3fe5-4fd0-b366-6bf198764e66",
+      "studentId": "22a6d2cf-78e2-473a-8b4a-ecace322892a",
+      "mese": "2026-10",
+      "importo": 60,
+      "data": "2026-10-01",
+      "metodo": "Contanti",
+      "note": "",
+      "numero": 5,
+      "anno": 2026,
+      "emailInviata": {
+        "data": "2026-10-06T16:33:20.933Z",
+        "to": "astemio.melodie@gmail.com"
+      },
+      "creato": "2026-10-06T10:01:44.364Z",
+      "teacherPaymentId": "063a9f05-b219-4e83-9e89-34644ddbffe4",
+      "teacherPaymentNumero": 1
+    },
+    {
+      "id": "313b90af-62a5-4109-9fdb-a1f0c1602db6",
+      "studentId": "893b8d4b-d533-49c7-9df7-6a75b226e06e",
+      "mese": "2026-10",
+      "importo": 60,
+      "data": "2026-10-01",
+      "metodo": "Contanti",
+      "note": "",
+      "numero": 6,
+      "anno": 2026,
+      "emailInviata": {
+        "data": "2026-10-16T21:28:01.696Z",
+        "to": "bastemio@gmail.com"
+      },
+      "creato": "2026-10-06T10:01:44.364Z",
+      "teacherPaymentId": "063a9f05-b219-4e83-9e89-34644ddbffe4",
+      "teacherPaymentNumero": 1
+    },
+    {
+      "id": "52192e55-12d6-4fbb-921a-c674afcad6d3",
+      "studentId": "077d1508-ecca-4c9f-9808-466415df6cc4",
+      "mese": "2026-10",
+      "importo": 60,
+      "data": "2026-10-01",
+      "metodo": "Contanti",
+      "note": "",
+      "numero": 7,
+      "anno": 2026,
+      "emailInviata": {
+        "data": "2026-10-08T21:05:54.926Z",
+        "to": "bastemio@gmail.com"
+      },
+      "creato": "2026-10-06T10:01:44.364Z",
+      "teacherPaymentId": "063a9f05-b219-4e83-9e89-34644ddbffe4",
+      "teacherPaymentNumero": 1
+    },
+    {
+      "id": "7fd23e1a-4e48-43e9-b795-0e8ff023ecb6",
+      "studentId": "90676fca-f5a4-453a-b5f1-2d4ea2b6c8bb",
+      "mese": "2026-10",
+      "importo": 60,
+      "data": "2026-10-01",
+      "metodo": "Contanti",
+      "note": "",
+      "numero": 8,
+      "anno": 2026,
+      "emailInviata": {
+        "data": "2026-10-08T21:05:35.427Z",
+        "to": "bastemio@gmail.com"
+      },
+      "creato": "2026-10-06T10:01:44.364Z",
+      "teacherPaymentId": "063a9f05-b219-4e83-9e89-34644ddbffe4",
+      "teacherPaymentNumero": 1
+    },
+    {
+      "id": "ca85c92e-c638-4541-9396-9f0ab93f7635",
+      "studentId": "afec4b22-c75b-4cfa-b90b-2cb387b7d48b",
+      "mese": "2026-10",
+      "importo": 60,
+      "data": "2026-10-01",
+      "metodo": "Contanti",
+      "note": "",
+      "numero": 9,
+      "anno": 2026,
+      "emailInviata": {
+        "data": "2026-10-08T21:05:06.214Z",
+        "to": "bastemio@gmail.com"
+      },
+      "creato": "2026-10-06T10:01:44.364Z",
+      "teacherPaymentId": "063a9f05-b219-4e83-9e89-34644ddbffe4",
+      "teacherPaymentNumero": 1
+    },
+    {
+      "id": "e90396f4-85ae-43a7-b2d3-9953cee49d3f",
+      "studentId": "003b6012-18e7-4df0-b136-83d8989a34bc",
+      "mese": "2026-10",
+      "importo": 60,
+      "data": "2026-10-01",
+      "metodo": "Contanti",
+      "note": "",
+      "numero": 10,
+      "anno": 2026,
+      "emailInviata": {
+        "data": "2026-10-08T21:03:27.106Z",
+        "to": "larissafama2005@icloud.com"
+      },
+      "creato": "2026-10-06T10:01:44.364Z",
+      "teacherPaymentId": "063a9f05-b219-4e83-9e89-34644ddbffe4",
+      "teacherPaymentNumero": 1
+    },
+    {
+      "id": "1c2dd387-2f7a-4d15-83ed-48cc1e7ad088",
+      "studentId": "8e2cd44d-7234-45c6-bb78-969e5d69b6cc",
+      "mese": "2026-10",
+      "importo": 60,
+      "data": "2026-10-10",
+      "metodo": "Contanti",
+      "note": "",
+      "numero": 11,
+      "anno": 2026,
+      "emailInviata": {
+        "data": "2026-10-16T14:38:22.476Z",
+        "to": "francesco2000parisi@gmail.com"
+      },
+      "creato": "2026-10-13T16:29:36.916Z",
+      "teacherPaymentId": "abae3461-c319-46bf-8ea6-cf5e711fc8fd",
+      "teacherPaymentNumero": 2
+    }
+  ],
+  "teacherPayments": [
+    {
+      "id": "063a9f05-b219-4e83-9e89-34644ddbffe4",
+      "numero": 1,
+      "anno": 2026,
+      "data": "2026-10-09",
+      "mese": "2026-10",
+      "importo": 600,
+      "totRetteIncassate": 600,
+      "quotaMaestro": 600,
+      "quotaScuola": 0,
+      "numRette": 10,
+      "studentiCoinvolti": [
+        {
+          "id": "6f8137de-df93-4420-8546-9bdbc0304f32",
+          "paymentId": "77cd7fe5-031b-43cc-b64b-137b147d6ecb",
+          "nome": "Giada Lepore",
+          "strumento": "Canto",
+          "ricevuta": "1/2026",
+          "importo": 60
+        },
+        {
+          "id": "972a4538-5c3b-4ca4-b6fd-cf791a4e591c",
+          "paymentId": "74d1430e-9c86-40fa-bc32-97adb15511cc",
+          "nome": "Martina Valastro",
+          "strumento": "Chitarra",
+          "ricevuta": "2/2026",
+          "importo": 60
+        },
+        {
+          "id": "a9a4eb23-8fc0-49fa-a06b-5dfdcc5c3181",
+          "paymentId": "0c6f1e0f-532d-4e60-b02b-7eefd853f708",
+          "nome": "Giovanni Valastro",
+          "strumento": "Basso",
+          "ricevuta": "3/2026",
+          "importo": 60
+        },
+        {
+          "id": "a9233c50-3fd7-4c59-8a13-16b27a8b74a8",
+          "paymentId": "e40e6add-a0f1-4da6-b945-ef579db4666a",
+          "nome": "Daniel Astemio",
+          "strumento": "Canto",
+          "ricevuta": "4/2026",
+          "importo": 60
+        },
+        {
+          "id": "22a6d2cf-78e2-473a-8b4a-ecace322892a",
+          "paymentId": "0e0a8dd4-3fe5-4fd0-b366-6bf198764e66",
+          "nome": "Melly Astemio",
+          "strumento": "Basso",
+          "ricevuta": "5/2026",
+          "importo": 60
+        },
+        {
+          "id": "893b8d4b-d533-49c7-9df7-6a75b226e06e",
+          "paymentId": "313b90af-62a5-4109-9fdb-a1f0c1602db6",
+          "nome": "Evan Astemio",
+          "strumento": "Piano",
+          "ricevuta": "6/2026",
+          "importo": 60
+        },
+        {
+          "id": "077d1508-ecca-4c9f-9808-466415df6cc4",
+          "paymentId": "52192e55-12d6-4fbb-921a-c674afcad6d3",
+          "nome": "Laura Rios",
+          "strumento": "Canto",
+          "ricevuta": "7/2026",
+          "importo": 60
+        },
+        {
+          "id": "90676fca-f5a4-453a-b5f1-2d4ea2b6c8bb",
+          "paymentId": "7fd23e1a-4e48-43e9-b795-0e8ff023ecb6",
+          "nome": "Emanuele Silvestro",
+          "strumento": "Chitarra",
+          "ricevuta": "8/2026",
+          "importo": 60
+        },
+        {
+          "id": "afec4b22-c75b-4cfa-b90b-2cb387b7d48b",
+          "paymentId": "ca85c92e-c638-4541-9396-9f0ab93f7635",
+          "nome": "Vincenzo Parisi",
+          "strumento": "Piano",
+          "ricevuta": "9/2026",
+          "importo": 60
+        },
+        {
+          "id": "003b6012-18e7-4df0-b136-83d8989a34bc",
+          "paymentId": "e90396f4-85ae-43a7-b2d3-9953cee49d3f",
+          "nome": "Larissa Famà",
+          "strumento": "Piano",
+          "ricevuta": "10/2026",
+          "importo": 60
+        }
+      ],
+      "metodo": "Contanti",
+      "note": "Primo week end da recuperare",
+      "fattura": {
+        "numero": "",
+        "data": "2026-10-08",
+        "importo": 600,
+        "stato": "In attesa di fattura",
+        "note": ""
+      },
+      "emailInviata": null,
+      "creato": "2026-10-08T21:32:25.518Z",
+      "paymentIds": [
+        "77cd7fe5-031b-43cc-b64b-137b147d6ecb",
+        "74d1430e-9c86-40fa-bc32-97adb15511cc",
+        "0c6f1e0f-532d-4e60-b02b-7eefd853f708",
+        "e40e6add-a0f1-4da6-b945-ef579db4666a",
+        "0e0a8dd4-3fe5-4fd0-b366-6bf198764e66",
+        "313b90af-62a5-4109-9fdb-a1f0c1602db6",
+        "52192e55-12d6-4fbb-921a-c674afcad6d3",
+        "7fd23e1a-4e48-43e9-b795-0e8ff023ecb6",
+        "ca85c92e-c638-4541-9396-9f0ab93f7635",
+        "e90396f4-85ae-43a7-b2d3-9953cee49d3f"
+      ]
+    },
+    {
+      "id": "abae3461-c319-46bf-8ea6-cf5e711fc8fd",
+      "numero": 2,
+      "anno": 2026,
+      "data": "2026-10-16",
+      "mese": "2026-10",
+      "importo": 60,
+      "totRetteIncassate": 60,
+      "quotaMaestro": 60,
+      "quotaScuola": 0,
+      "numRette": 1,
+      "studentiCoinvolti": [
+        {
+          "id": "8e2cd44d-7234-45c6-bb78-969e5d69b6cc",
+          "paymentId": "1c2dd387-2f7a-4d15-83ed-48cc1e7ad088",
+          "nome": "Francesco Parisi",
+          "strumento": "Chitarra",
+          "ricevuta": "11/2026",
+          "importo": 60
+        }
+      ],
+      "paymentIds": [
+        "1c2dd387-2f7a-4d15-83ed-48cc1e7ad088"
+      ],
+      "metodo": "Bonifico bancario",
+      "note": "",
+      "fattura": {
+        "numero": "",
+        "data": "2026-10-16",
+        "importo": 60,
+        "stato": "Fattura registrata",
+        "note": ""
+      },
+      "emailInviata": null,
+      "creato": "2026-10-16T14:38:39.186Z"
+    }
+  ],
+  "attendance": {
+    "972a4538-5c3b-4ca4-b6fd-cf791a4e591c|2026-10-23": "G",
+    "a9a4eb23-8fc0-49fa-a06b-5dfdcc5c3181|2026-10-23": "G",
+    "6f8137de-df93-4420-8546-9bdbc0304f32|2026-10-09": "P",
+    "972a4538-5c3b-4ca4-b6fd-cf791a4e591c|2026-10-09": "P",
+    "a9a4eb23-8fc0-49fa-a06b-5dfdcc5c3181|2026-10-09": "P",
+    "a9233c50-3fd7-4c59-8a13-16b27a8b74a8|2026-10-09": "P",
+    "8e2cd44d-7234-45c6-bb78-969e5d69b6cc|2026-10-10": "P",
+    "22a6d2cf-78e2-473a-8b4a-ecace322892a|2026-10-10": "P",
+    "893b8d4b-d533-49c7-9df7-6a75b226e06e|2026-10-10": "P",
+    "077d1508-ecca-4c9f-9808-466415df6cc4|2026-10-10": "P",
+    "90676fca-f5a4-453a-b5f1-2d4ea2b6c8bb|2026-10-10": "P",
+    "afec4b22-c75b-4cfa-b90b-2cb387b7d48b|2026-10-10": "P",
+    "003b6012-18e7-4df0-b136-83d8989a34bc|2026-10-10": "P",
+    "6f8137de-df93-4420-8546-9bdbc0304f32|2026-10-16": "P",
+    "972a4538-5c3b-4ca4-b6fd-cf791a4e591c|2026-10-16": "P",
+    "a9a4eb23-8fc0-49fa-a06b-5dfdcc5c3181|2026-10-16": "P",
+    "a9233c50-3fd7-4c59-8a13-16b27a8b74a8|2026-10-16": "G",
+    "22a6d2cf-78e2-473a-8b4a-ecace322892a|2026-10-16": "P",
+    "8e2cd44d-7234-45c6-bb78-969e5d69b6cc|2026-10-17": "G",
+    "893b8d4b-d533-49c7-9df7-6a75b226e06e|2026-10-17": "P",
+    "90676fca-f5a4-453a-b5f1-2d4ea2b6c8bb|2026-10-17": "P",
+    "077d1508-ecca-4c9f-9808-466415df6cc4|2026-10-17": "P",
+    "afec4b22-c75b-4cfa-b90b-2cb387b7d48b|2026-10-17": "P",
+    "003b6012-18e7-4df0-b136-83d8989a34bc|2026-10-17": "P",
+    "a9233c50-3fd7-4c59-8a13-16b27a8b74a8|2026-10-23": "P",
+    "6f8137de-df93-4420-8546-9bdbc0304f32|2026-10-23": "P",
+    "893b8d4b-d533-49c7-9df7-6a75b226e06e|2026-10-24": "P",
+    "003b6012-18e7-4df0-b136-83d8989a34bc|2026-10-24": "P",
+    "afec4b22-c75b-4cfa-b90b-2cb387b7d48b|2026-10-24": "P",
+    "077d1508-ecca-4c9f-9808-466415df6cc4|2026-10-24": "P",
+    "90676fca-f5a4-453a-b5f1-2d4ea2b6c8bb|2026-10-24": "P",
+    "22a6d2cf-78e2-473a-8b4a-ecace322892a|2026-10-24": "P",
+    "a9a4eb23-8fc0-49fa-a06b-5dfdcc5c3181|2026-10-30": "G",
+    "8e2cd44d-7234-45c6-bb78-969e5d69b6cc|2026-10-24": "P",
+    "972a4538-5c3b-4ca4-b6fd-cf791a4e591c|2026-10-30": "P"
+  },
+  "closures": [
+    "2026-10-02",
+    "2026-10-03"
+  ],
+  "recoveries": [
+    {
+      "id": "3a5b9fd0-3340-4603-bc20-387cf0c27c67",
+      "studentId": "8e2cd44d-7234-45c6-bb78-969e5d69b6cc",
+      "date": "2026-10-23",
+      "orario": "17:30 - 18:15",
+      "note": "Assenza da recuperare",
+      "stato": "REC"
+    },
+    {
+      "id": "37d1df7a-194d-4360-8d79-5bf50ab369cf",
+      "studentId": "972a4538-5c3b-4ca4-b6fd-cf791a4e591c",
+      "date": "2026-10-30",
+      "orario": "17:30-18:15",
+      "note": "",
+      "stato": "REC"
+    }
+  ],
+  "expenses": [],
+  "incomeExtra": [],
+  "settings": {
+    "scuola": "COME TRALCI - NOVARA - SCUOLA DI MUSICA",
+    "associazioneEstesa": "Chiesa Evangelica Pentecostale e Missionaria Come Tralci - Novara",
+    "indirizzo": "Via Enrico Mattei, 4",
+    "citta": "Novara",
+    "codiceFiscale": "",
+    "firmatario": "Segreteria chiesa: Bruno Astemio",
+    "firmatarioRicevute": "Segreteria chiesa: Bruno Astemio",
+    "firmatarioProspetti": "Maestro Dario Artuso",
+    "firmatarioSegreteria": "Bruno Astemio",
+    "firmatarioMaestro": "Maestro Dario Artuso",
+    "rettaDefault": 60,
+    "notaRicevuta": "Le rette saranno consegnate al maestro con un prospetto di liquidazione consultabile.su richiesta.\nBruno A.",
+    "annoScolasticoInizio": "2026-10-01",
+    "annoScolasticoFine": "2027-06-30",
+    "strumenti": [
+      "Canto",
+      "Basso",
+      "Piano",
+      "Chitarra"
+    ],
+    "smtp": {
+      "host": "smtp.gmail.com",
+      "port": 465,
+      "secure": true,
+      "user": "segreteria.cometralcinovara@gmail.com",
+      "pass": "uaak pomc nzdw fdkn",
+      "from": "Scuola di Musica e Canto - Come Tralci Novara"
+    },
+    "emailTesto": "Gentile {intestatario},\n\nconfermiamo di aver ricevuto il pagamento di {importo} per la retta di {mese} di {allievo}.\nDi seguito trova la ricevuta n. {numero}.\n\nGrazie e a presto!\nBruno Astemio  -  Segreteria Chiesa Come Tralci Novara\nPer conto di: Scuola di Musica e Canto",
+    "emailTestoLiquidazione": "In allegato il prospetto di liquidazione rette n. {numero}/{anno} per il mese di {mese}.\n\nImporto: {importo}\nFattura: {fattura}\n\nGrazie e a presto!\n{firmatario}\n{scuola}"
+  },
+  "weeklySchedules": {
+    "2026-10-26": {
+      "weekStart": "2026-10-26",
+      "days": {
+        "2026-10-30": [
+          {
+            "id": "7d81b2c1-439a-4094-a665-75e3e999cfe3",
+            "studentId": "6f8137de-df93-4420-8546-9bdbc0304f32",
+            "nome": "Giada Lepore",
+            "strumento": "Canto",
+            "orario": "16:00",
+            "stato": "CONFERMATO",
+            "tipo": "regolare",
+            "telefono": "3518271697",
+            "email": "giadaalbalepore4@gmail.com",
+            "note": ""
+          },
+          {
+            "id": "181ed5f0-71b2-4934-a53d-1a6332ef49c8",
+            "studentId": "972a4538-5c3b-4ca4-b6fd-cf791a4e591c",
+            "nome": "Martina Valastro",
+            "strumento": "Chitarra",
+            "orario": "16:45",
+            "stato": "CONFERMATO",
+            "tipo": "regolare",
+            "telefono": "3760084694",
+            "email": "segreteria.valastro@libero.it",
+            "note": ""
+          },
+          {
+            "id": "4e1ab260-83c1-42ae-bf78-175e8fc61e69",
+            "studentId": "a9a4eb23-8fc0-49fa-a06b-5dfdcc5c3181",
+            "nome": "Giovanni Valastro",
+            "strumento": "Basso",
+            "orario": "17:30 – 18:15",
+            "stato": "ASSENTE",
+            "tipo": "regolare",
+            "telefono": "3760084699",
+            "email": "segreteria.valastro@libero.it",
+            "note": "Assenza registrata"
+          },
+          {
+            "id": "7659eab0-b8b6-4f82-b9ed-a01f50e36032",
+            "studentId": "972a4538-5c3b-4ca4-b6fd-cf791a4e591c",
+            "nome": "Martina Valastro",
+            "strumento": "Chitarra",
+            "orario": "17:30",
+            "stato": "RECUPERO",
+            "tipo": "recupero",
+            "telefono": "3760084694",
+            "email": "segreteria.valastro@libero.it",
+            "note": "Lezione di recupero programmata"
+          },
+          {
+            "id": "d62a2f71-9e95-4ff2-8654-650a76b1399c",
+            "studentId": "a9233c50-3fd7-4c59-8a13-16b27a8b74a8",
+            "nome": "Daniel Astemio",
+            "strumento": "Canto",
+            "orario": "18:15",
+            "stato": "CONFERMATO",
+            "tipo": "regolare",
+            "telefono": "3461058764",
+            "email": "astemio.daniel@gmail.com",
+            "note": ""
+          }
+        ],
+        "2026-10-31": [
+          {
+            "id": "0dffd071-2720-4725-9b9e-dd5dbe4fadab",
+            "studentId": "8e2cd44d-7234-45c6-bb78-969e5d69b6cc",
+            "nome": "Francesco Parisi",
+            "strumento": "Chitarra",
+            "orario": "09:00 – 09:45",
+            "stato": "CONFERMATO",
+            "tipo": "regolare",
+            "telefono": "3479862987",
+            "email": "francesco2000parisi@gmail.com",
+            "note": ""
+          },
+          {
+            "id": "1090667f-011b-45b6-a502-05c9321da030",
+            "studentId": "22a6d2cf-78e2-473a-8b4a-ecace322892a",
+            "nome": "Melly Astemio",
+            "strumento": "Basso",
+            "orario": "09:45 – 10:30",
+            "stato": "CONFERMATO",
+            "tipo": "regolare",
+            "telefono": "3208522745",
+            "email": "astemio.melodie@gmail.com",
+            "note": ""
+          },
+          {
+            "id": "d092b914-c717-4852-a7f0-ee713996d20b",
+            "studentId": "893b8d4b-d533-49c7-9df7-6a75b226e06e",
+            "nome": "Evan Astemio",
+            "strumento": "Piano",
+            "orario": "10:30 – 11:15",
+            "stato": "CONFERMATO",
+            "tipo": "regolare",
+            "telefono": "3755206105",
+            "email": "eastemio@gmail.com",
+            "note": ""
+          },
+          {
+            "id": "8356bb81-4ba9-403e-b90e-eda19b778da1",
+            "studentId": "077d1508-ecca-4c9f-9808-466415df6cc4",
+            "nome": "Laura Rios",
+            "strumento": "Canto",
+            "orario": "11:15 – 12:00",
+            "stato": "CONFERMATO",
+            "tipo": "regolare",
+            "telefono": "3446274581",
+            "email": "laurariosmera95@gmail.com",
+            "note": ""
+          },
+          {
+            "id": "6ec598b4-ff7f-420f-8534-8c14abe6bee8",
+            "studentId": "90676fca-f5a4-453a-b5f1-2d4ea2b6c8bb",
+            "nome": "Emanuele Silvestro",
+            "strumento": "Chitarra",
+            "orario": "12:00 – 12:45",
+            "stato": "CONFERMATO",
+            "tipo": "regolare",
+            "telefono": "3347358522",
+            "email": "manusilvestro@gmail.com",
+            "note": ""
+          },
+          {
+            "id": "5a4e9584-70f1-45bb-a6f0-bdc6df5bc015",
+            "studentId": "afec4b22-c75b-4cfa-b90b-2cb387b7d48b",
+            "nome": "Vincenzo Parisi",
+            "strumento": "Piano",
+            "orario": "12:45 – 13:30",
+            "stato": "CONFERMATO",
+            "tipo": "regolare",
+            "telefono": "3513713734",
+            "email": "vincenzopa03@gmail.com",
+            "note": ""
+          },
+          {
+            "id": "e876eeee-eed0-4cd5-8896-966593754aad",
+            "studentId": "003b6012-18e7-4df0-b136-83d8989a34bc",
+            "nome": "Larissa Famà",
+            "strumento": "Piano",
+            "orario": "13:30 – 14:15",
+            "stato": "CONFERMATO",
+            "tipo": "regolare",
+            "telefono": "3774589890",
+            "email": "larissafama2005@icloud.com",
+            "note": ""
+          }
+        ]
+      },
+      "note": "",
+      "aggiornato": "2026-10-29T14:27:06.409Z"
+    }
+  },
+  "teachers": [
+    {
+      "id": "ba64ac90-a18c-495f-a774-b90673096795",
+      "nome": "Bruno",
+      "cognome": "Astemio",
+      "cf": "",
+      "piva": "",
+      "email": "",
+      "telefono": "",
+      "compensoPerc": 70,
+      "iban": "",
+      "note": "Insegnante"
+    }
+  ]
+}
