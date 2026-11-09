@@ -5,7 +5,7 @@
   "lang": "it",
   "start_url": "./",
   "scope": "./",
-  "id": "./",
+  "id": "?app=tralci-di-note",
   "display": "standalone",
   "background_color": "#f0f7f2",
   "theme_color": "#0b545d",
