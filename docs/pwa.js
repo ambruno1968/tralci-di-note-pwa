@@ -155,9 +155,20 @@
     closeApp: () => { try { window.close(); } catch (_) {} }
   };
 
-  // ---- Service worker + pulsante "Installa"
+  // ---- Service worker + aggiornamento automatico immediato
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(e => console.warn('SW:', e)));
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').then(reg => {
+        reg.update();
+      }).catch(e => console.warn('SW:', e));
+    });
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) {
+        refreshing = true;
+        window.location.reload();
+      }
+    });
   }
   let deferred = null;
   window.addEventListener('beforeinstallprompt', e => {

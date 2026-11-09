@@ -1,5 +1,5 @@
 /* Service worker di Tralci di note: funzionamento offline dell'app. */
-const CACHE = 'tralci-di-note-v3.0.0';
+const CACHE = 'tralci-di-note-v3.0.1';
 const SHELL = [
   './', 'index.html', 'styles.css', 'app.js', 'pwa.js', 'localDbEngine.js', 'driveClient.js',
   'printTemplates.js', 'default-db.json', 'WIKI.md', 'logo.png', 'icon.png',
@@ -7,7 +7,8 @@ const SHELL = [
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
+  self.skipWaiting();
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)));
 });
 
 self.addEventListener('activate', e => {
