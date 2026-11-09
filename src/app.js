@@ -15,7 +15,7 @@ const getStrumenti = () => (Array.isArray(S?.settings?.strumenti) && S.settings.
 const METODI = ['Contanti', 'Bonifico bancario', 'POS / Carta', 'Satispay', 'Assegno', 'Altro'];
 const SPESE_CAT = ['Materiale didattico', 'Affitto / Utenze', 'Cancelleria e stampe', 'Manutenzione strumenti', 'SIAE / Diritti', 'Spese bancarie', 'Varie'];
 const ENTRATE_CAT = ['Quota iscrizione annuale', 'Saggio / Concerto', 'Donazione / Contributo', 'Rimborso', 'Varie'];
-const APP_VERSION = '2.0';
+const APP_VERSION = '3.0';
 const PRES = {
   P: { label: 'Presente', cls: 'p' },
   A: { label: 'Assente', cls: 'a' },

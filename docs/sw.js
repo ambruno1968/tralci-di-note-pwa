@@ -1,5 +1,5 @@
 /* Service worker di Tralci di note: funzionamento offline dell'app. */
-const CACHE = 'tralci-di-note-v2.0.1';
+const CACHE = 'tralci-di-note-v3.0.0';
 const SHELL = [
   './', 'index.html', 'styles.css', 'app.js', 'pwa.js', 'localDbEngine.js', 'driveClient.js',
   'printTemplates.js', 'default-db.json', 'WIKI.md', 'logo.png', 'icon.png',

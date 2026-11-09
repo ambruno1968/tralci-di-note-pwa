@@ -21,7 +21,7 @@
   // ---- Stile: nasconde il pulsante "Chiudi" (in una PWA si chiude dalla finestra)
   const st = document.createElement('style');
   st.textContent = '.btn-close-app{display:none!important}' +
-    '#pwa-install{position:fixed;right:14px;bottom:80px;z-index:9999;background:#2563eb;color:#fff;border:0;' +
+    '#pwa-install{position:fixed;right:14px;bottom:80px;z-index:9999;background:#0b545d;color:#fff;border:0;' +
     'padding:10px 16px;border-radius:999px;font-weight:700;box-shadow:0 4px 14px rgba(0,0,0,.25);cursor:pointer}';
   document.head.appendChild(st);
 
