@@ -350,8 +350,19 @@
     const smtp = { ...db.settings.smtp, pass: '', hasPass: !!db.settings.smtp?.pass };
     return {
       ...db,
-      version: '1.0.3',
+      version: '3.0',
       changelog: [
+        {
+          version: '3.0',
+          date: '2026-11-09',
+          title: 'Versione PWA 3.0 — Nuovo Tema Verde Petrolio coordinato al Logo & Sfondo Filigranato',
+          changes: [
+            'Testata e accenti grafici coordinati al colore del logo ufficiale (verde petrolio profondo #0B545D)',
+            'Sfondo dell\'applicazione con logo in filigrana centrato a trasparenza 90%',
+            'PWA autonoma per Chromebook e desktop con supporto offline completo',
+            'Sincronizzazione cloud Google Drive ottimizzata con nuovo Client ID Web'
+          ]
+        },
         {
           version: '1.0.3',
           date: '2026-10-30',
