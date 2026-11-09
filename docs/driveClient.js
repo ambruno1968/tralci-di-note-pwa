@@ -6,7 +6,7 @@
   const DRIVE_CONFIG_KEY = 'tralci_note_drive_config';
   const DRIVE_TOKEN_KEY = 'tralci_note_drive_token_data';
 
-  const BUNDLED_CLIENT_ID = '1078975750372-qrvfio9nafjvqsmhhdtfdd8qjkteb187.apps.googleusercontent.com';
+  const BUNDLED_CLIENT_ID = '1078975750372-goiokfhggk06t2b6s8fr73vfthls1i87.apps.googleusercontent.com';
   const BUNDLED_CLIENT_SECRET = '';
   const FOLDER_NAME_DEFAULT = 'Gestionale Scuola di Musica';
 

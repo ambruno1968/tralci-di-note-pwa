@@ -30,8 +30,10 @@ else write('WIKI.md', '# Guida\n\nConsulta la guida nella versione PC.\n');
 cp(path.join(AND, 'localDbEngine.js'), 'localDbEngine.js');
 cp(path.join(AND, 'printTemplates.js'), 'printTemplates.js');
 
-// driveClient: niente client secret in un sito pubblico + rinnovo token silenzioso
+// driveClient: client ID Web, niente client secret in un sito pubblico + rinnovo token silenzioso
+const WEB_CLIENT_ID = '1078975750372-goiokfhggk06t2b6s8fr73vfthls1i87.apps.googleusercontent.com';
 let dc = read(path.join(AND, 'driveClient.js'));
+dc = dc.replace(/const BUNDLED_CLIENT_ID = '[^']*';/, `const BUNDLED_CLIENT_ID = '${WEB_CLIENT_ID}';`);
 dc = dc.replace(/const BUNDLED_CLIENT_SECRET = '[^']*';/, "const BUNDLED_CLIENT_SECRET = '';");
 dc = dc.replace(
   /if \(!tokenData\.refresh_token\) \{\s*throw new Error\('Sessione Google scaduta\. Ricollega il tuo account Google\.'\);\s*\}/,

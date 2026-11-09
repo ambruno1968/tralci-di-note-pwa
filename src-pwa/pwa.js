@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  const CLIENT_ID = '1078975750372-qrvfio9nafjvqsmhhdtfdd8qjkteb187.apps.googleusercontent.com';
+  const CLIENT_ID = '1078975750372-goiokfhggk06t2b6s8fr73vfthls1i87.apps.googleusercontent.com';
   const SCOPES = [
     'https://www.googleapis.com/auth/drive.file',
     'https://www.googleapis.com/auth/userinfo.email',
