@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tralci di note - Come Tralci - Novara</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="top-main-bar">
+      <div class="brand">
+        <img src="logo.png" alt="Logo Tralci di note" class="logo-img" data-act="show-logo-modal" title="Clicca per visualizzare a dimensione intera">
+        <div class="brand-text">
+          <div class="title">
+            <span class="app-name">Tralci di note</span>
+            <span class="church-badge">Come Tralci - Novara</span>
+          </div>
+          <div class="meta-row">
+            <span class="version-tag" id="app-version" data-act="show-changelog-modal" title="Clicca per visualizzare il registro versioni (Changelog)">v2.0</span>
+            <span class="author-tag">Sviluppato da Bruno Astemio con Antigravity</span>
+          </div>
+          <div class="subtitle" id="school-name"></div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <div id="cloud-status-slot"></div>
+        <button type="button" class="btn-close-app" id="btn-close-app" data-act="app-close" title="Chiudi il gestionale Tralci di note">
+          <span style="font-size:13px;line-height:1;">✕</span>
+          <span class="close-lbl">Chiudi</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="view"><p class="loading">Caricamento...</p></main>
+
+  <footer class="app-footer">
+    <b>Tralci di note</b> • <span id="footer-version" data-act="show-changelog-modal" title="Clicca per visualizzare il registro versioni (Changelog)" style="cursor:pointer;text-decoration:underline;">v2.0</span> • Sviluppato da Bruno Astemio con Antigravity per Come Tralci - Novara<br>
+    <span style="font-size:11px;color:#cbd5e1;">Chiesa Evangelica Pentecostale e Missionaria Come Tralci - Novara</span>
+  </footer>
+
+  <nav class="bottom-nav tabs" aria-label="Menu di navigazione">
+    <a href="#dashboard" data-tab="dashboard" class="active">
+      <span class="tab-ico">📊</span>
+      <span class="tab-lbl">Dashboard</span>
+    </a>
+    <a href="#studenti" data-tab="studenti">
+      <span class="tab-ico">👥</span>
+      <span class="tab-lbl">Studenti</span>
+    </a>
+    <a href="#presenze" data-tab="presenze">
+      <span class="tab-ico">📅</span>
+      <span class="tab-lbl">Presenze</span>
+    </a>
+    <a href="#pagamenti" data-tab="pagamenti">
+      <span class="tab-ico">💳</span>
+      <span class="tab-lbl">Pagamenti</span>
+    </a>
+    <a href="#ricevute" data-tab="ricevute">
+      <span class="tab-ico">🧾</span>
+      <span class="tab-lbl">Ricevute</span>
+    </a>
+    <a href="#primanota" data-tab="primanota">
+      <span class="tab-ico">📖</span>
+      <span class="tab-lbl">Prima Nota</span>
+    </a>
+    <a href="#impostazioni" data-tab="impostazioni">
+      <span class="tab-ico">⚙️</span>
+      <span class="tab-lbl">Impostazioni</span>
+    </a>
+    <a href="#guida" data-tab="guida">
+      <span class="tab-ico">📚</span>
+      <span class="tab-lbl">Guida</span>
+    </a>
+  </nav>
+
+  <dialog id="dlg"></dialog>
+  <dialog id="dlg-prompt" class="dlg-prompt"></dialog>
+  <div id="toasts"></div>
+
+  <!-- Moduli Offline e Bridge Android -->
+  <script src="pwa.js"></script>
+  <script src="printTemplates.js"></script>
+  <script src="driveClient.js"></script>
+  <script src="localDbEngine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
