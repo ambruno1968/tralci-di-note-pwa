@@ -185,6 +185,26 @@
       return tokenData;
     }
 
+    invalidateAccessToken() {
+      const tokenData = this.getTokenData();
+      if (tokenData) {
+        delete tokenData.access_token;
+        delete tokenData.expires_at;
+        this.saveTokenData(tokenData);
+      }
+    }
+
+    async authFetch(url, options = {}, retried = false) {
+      const accessToken = await this.getValidAccessToken();
+      const headers = { ...(options.headers || {}), Authorization: `Bearer ${accessToken}` };
+      const res = await fetch(url, { ...options, headers });
+      if (res.status === 401 && !retried) {
+        this.invalidateAccessToken();
+        return this.authFetch(url, options, true);
+      }
+      return res;
+    }
+
     async getValidAccessToken() {
       const tokenData = this.getTokenData();
       if (!tokenData) throw new Error('Nessun account Google collegato.');
@@ -226,13 +246,10 @@
       if (this.cachedFolderId && this.cachedFolderName === folderName) {
         return this.cachedFolderId;
       }
-      const accessToken = await this.getValidAccessToken();
       const q = `name = '${folderName.replace(/'/g, "\\'")}' and mimeType = 'application/vnd.google-apps.folder' and trashed = false`;
       const searchUrl = `${DRIVE_FILES_URL}?q=${encodeURIComponent(q)}&fields=files(id,name)&spaces=drive`;
 
-      const res = await fetch(searchUrl, {
-        headers: { Authorization: `Bearer ${accessToken}` }
-      });
+      const res = await this.authFetch(searchUrl, { cache: 'no-store' });
       const data = await res.json();
       if (!res.ok) throw new Error('Errore ricerca cartella Google Drive: ' + (data.error?.message || res.statusText));
 
@@ -242,10 +259,9 @@
         return this.cachedFolderId;
       }
 
-      const createRes = await fetch(DRIVE_FILES_URL, {
+      const createRes = await this.authFetch(DRIVE_FILES_URL, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -261,13 +277,11 @@
     }
 
     async getRemoteFile(folderId) {
-      const accessToken = await this.getValidAccessToken();
       const q = `name = 'db.json' and '${folderId}' in parents and trashed = false`;
       const searchUrl = `${DRIVE_FILES_URL}?q=${encodeURIComponent(q)}&fields=files(id,name,modifiedTime,size)&orderBy=modifiedTime desc&_t=${Date.now()}`;
 
-      const res = await fetch(searchUrl, {
-        cache: 'no-store',
-        headers: { Authorization: `Bearer ${accessToken}` }
+      const res = await this.authFetch(searchUrl, {
+        cache: 'no-store'
       });
       const data = await res.json();
       if (!res.ok) throw new Error('Errore ricerca db.json su Drive: ' + (data.error?.message || res.statusText));
@@ -288,11 +302,9 @@
         const remoteFile = await this.getRemoteFile(folderId);
         if (!remoteFile) return null;
 
-        const accessToken = await this.getValidAccessToken();
         const downloadUrl = `${DRIVE_FILES_URL}/${remoteFile.id}?alt=media&_t=${Date.now()}`;
-        const res = await fetch(downloadUrl, {
-          cache: 'no-store',
-          headers: { Authorization: `Bearer ${accessToken}` }
+        const res = await this.authFetch(downloadUrl, {
+          cache: 'no-store'
         });
         if (!res.ok) throw new Error(`Download db.json fallito (${res.status})`);
         const parsed = await res.json();
@@ -301,6 +313,9 @@
           modifiedTime: remoteFile.modifiedTime,
           data: parsed
         };
+      } catch (err) {
+        this.updateSyncRecord(false, 'download', err.message);
+        throw err;
       } finally {
         this.setSyncState('idle');
       }
@@ -312,16 +327,14 @@
         const cfg = this.loadConfig();
         const folderId = await this.findOrCreateFolder(cfg.folderName || FOLDER_NAME_DEFAULT);
         const remoteFile = await this.getRemoteFile(folderId);
-        const accessToken = await this.getValidAccessToken();
         const jsonContent = JSON.stringify(dbObject, null, 2);
 
         if (remoteFile) {
           const patchUrl = `${DRIVE_UPLOAD_URL}/${remoteFile.id}?uploadType=media&fields=id,name,modifiedTime`;
-          const res = await fetch(patchUrl, {
+          const res = await this.authFetch(patchUrl, {
             method: 'POST',
             cache: 'no-store',
             headers: {
-              Authorization: `Bearer ${accessToken}`,
               'X-HTTP-Method-Override': 'PATCH',
               'Content-Type': 'application/json; charset=utf-8'
             },
@@ -343,10 +356,9 @@
             `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${jsonContent}\r\n` +
             `--${boundary}--`;
           const uploadUrl = `${DRIVE_UPLOAD_URL}?uploadType=multipart&fields=id,name,modifiedTime`;
-          const res = await fetch(uploadUrl, {
+          const res = await this.authFetch(uploadUrl, {
             method: 'POST',
             headers: {
-              Authorization: `Bearer ${accessToken}`,
               'Content-Type': `multipart/related; boundary=${boundary}`
             },
             body: multipartBody

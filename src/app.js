@@ -4036,7 +4036,7 @@ const ACTIONS = {
 
   // Google Drive
   'cloud-menu': () => openCloudMenu(),
-  'cloud-quick-sync': () => syncGoogle('upload'),
+  'cloud-quick-sync': () => syncGoogle('auto'),
   'cloud-sync': d => syncGoogle(d.dir || 'auto'),
   'cloud-connect': () => connectGoogle(),
   'cloud-disconnect': () => disconnectGoogle(),
@@ -4237,6 +4237,48 @@ addEventListener('hashchange', async () => {
   try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (_) {}
 });
 
+let lastAutoSyncAttemptAt = 0
+async function autoSyncInBackground(force = false) {
+  const now = Date.now();
+  if (!force && now - lastAutoSyncAttemptAt < 20000) return;
+  if (isSyncing || !G_DRIVE?.connected || G_DRIVE?.autoSync === false) return;
+  if (typeof navigator !== 'undefined' && navigator.onLine === false) return;
+
+  lastAutoSyncAttemptAt = now;
+  isSyncing = true;
+  renderCloudPill();
+  try {
+    const res = await api('POST', '/api/google/sync', { direction: 'auto' });
+    if (res?.action === 'download') {
+      S = res.state || await api('GET', '/api/state');
+      render();
+      triggerJustSynced();
+      toast('☁️ Dati aggiornati da Google Drive');
+    } else if (res?.action === 'upload') {
+      triggerJustSynced();
+      toast('☁️ Dati locali sincronizzati su Google Drive');
+    } else if (res?.ok) {
+      triggerJustSynced();
+    }
+  } catch (err) {
+    console.warn('Auto-sync all\'avvio non riuscito:', err.message);
+  } finally {
+    isSyncing = false;
+    await loadGoogleStatus();
+  }
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    autoSyncInBackground(false);
+  }
+});
+
+window.addEventListener('online', () => {
+  autoSyncInBackground(true);
+});
+
 reload().then(() => {
   initGoogleSyncEvents();
+  autoSyncInBackground(true);
 }).catch(err => { $('#view').innerHTML = `<p class="loading">Errore caricamento: ${esc(err.message)}</p>`; });

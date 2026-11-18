@@ -83,15 +83,19 @@
     return gisPromise;
   }
 
-  function requestToken(prompt) {
+  function requestToken(prompt, hint) {
     return loadGis().then(() => new Promise((resolve, reject) => {
-      const client = google.accounts.oauth2.initTokenClient({
+      const config = {
         client_id: CLIENT_ID,
         scope: SCOPES,
         callback: resp => (resp && resp.access_token) ? resolve(resp) : reject(new Error((resp && (resp.error_description || resp.error)) || 'Accesso Google non riuscito')),
         error_callback: err => reject(new Error((err && (err.message || err.type)) || 'Accesso Google annullato'))
-      });
-      client.requestAccessToken({ prompt });
+      };
+      if (hint) config.hint = hint;
+      const client = google.accounts.oauth2.initTokenClient(config);
+      const reqOpts = { prompt };
+      if (hint) reqOpts.hint = hint;
+      client.requestAccessToken(reqOpts);
     }));
   }
 
@@ -126,14 +130,22 @@
     }
   }
 
+  let refreshPromise = null;
   async function silentRefresh() {
-    try {
-      const resp = await requestToken('');
-      const t = await storeToken(resp, true);
-      return t.access_token;
-    } catch (e) {
-      throw new Error('Sessione Google scaduta. Premi "Accedi a Google" per ricollegare l\'account.');
-    }
+    if (refreshPromise) return refreshPromise;
+    refreshPromise = (async () => {
+      try {
+        const prev = window.gDriveClient?.getTokenData() || {};
+        const resp = await requestToken('', prev.email);
+        const t = await storeToken(resp, true);
+        return t.access_token;
+      } catch (e) {
+        throw new Error('Sessione Google scaduta. Premi "Accedi a Google" per ricollegare l\'account.');
+      } finally {
+        refreshPromise = null;
+      }
+    })();
+    return refreshPromise;
   }
 
   window.PwaGoogle = { signIn, silentRefresh };

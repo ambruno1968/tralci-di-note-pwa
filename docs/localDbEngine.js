@@ -350,8 +350,19 @@
     const smtp = { ...db.settings.smtp, pass: '', hasPass: !!db.settings.smtp?.pass };
     return {
       ...db,
-      version: '3.0',
+      version: '3.1',
       changelog: [
+        {
+          version: '3.1',
+          date: '2026-11-18',
+          title: 'Versione 3.1 — Sincronizzazione Automatica all\'Avvio & Affidabilità Google Drive',
+          changes: [
+            'Sincronizzazione automatica bidirezionale all\'apertura dell\'app, al ritorno in primo piano e al ripristino della connessione',
+            'Pulsante rapido 🔄 ora esegue la sincronizzazione intelligente (auto) invece di sovrascrivere sempre il cloud',
+            'Rinnovo silenzioso del token Google migliorato con hint dell\'account e retry automatico su 401',
+            'Confronto timestamp locale/cloud ottimizzato per preservare sempre le modifiche più recenti senza conflitti'
+          ]
+        },
         {
           version: '3.0',
           date: '2026-11-09',
@@ -483,13 +494,22 @@
           || (remote.modifiedTime ? new Date(remote.modifiedTime).getTime() : 0);
         const lastSyncMs = window.gDriveClient.getStatus()?.lastSync ? new Date(window.gDriveClient.getStatus().lastSync).getTime() : 0;
 
+        // Se i timestamp coincidono (già allineato), nessuna operazione necessaria
+        if (localUpdatedMs > 0 && remoteUpdatedMs > 0 && Math.abs(localUpdatedMs - remoteUpdatedMs) < 1000) {
+          window.gDriveClient.updateSyncRecord(true, 'noop');
+          return { ok: true, action: 'noop', time: remote.modifiedTime, status: window.gDriveClient.getStatus() };
+        }
+
         // Se i dati locali sono stati modificati più di recente rispetto al cloud (o dopo l'ultimo sync), carica i dati locali su Drive!
-        if (localUpdatedMs > 0 && (localUpdatedMs >= remoteUpdatedMs || (lastSyncMs > 0 && localUpdatedMs > lastSyncMs && remoteUpdatedMs <= lastSyncMs + 2000))) {
+        if (localUpdatedMs > 0 && (localUpdatedMs > remoteUpdatedMs || (lastSyncMs > 0 && localUpdatedMs > lastSyncMs && remoteUpdatedMs <= lastSyncMs + 2000))) {
           const res = await window.gDriveClient.uploadDb(db);
           return { ok: true, action: 'upload', time: res.modifiedTime, status: window.gDriveClient.getStatus() };
         }
 
         db = remote.data;
+        if (!db._updatedAt && remote.modifiedTime) {
+          db._updatedAt = remote.modifiedTime;
+        }
         ensureDbIntegrity();
         save(true);
         window.gDriveClient.updateSyncRecord(true, 'download');
