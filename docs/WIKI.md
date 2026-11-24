@@ -3,7 +3,7 @@
 > **Gestionale Scuola di Musica per Come Tralci - Novara**  
 > *Chiesa Evangelica Pentecostale e Missionaria Come Tralci - Novara*  
 > *Sviluppato da Bruno Astemio con Antigravity*  
-> Versione documentata: **v3.2**
+> Versione documentata: **v3.2.1**
 
 ---
 

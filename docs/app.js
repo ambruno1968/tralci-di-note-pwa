@@ -15,7 +15,7 @@ const getStrumenti = () => (Array.isArray(S?.settings?.strumenti) && S.settings.
 const METODI = ['Contanti', 'Bonifico bancario', 'POS / Carta', 'Satispay', 'Assegno', 'Altro'];
 const SPESE_CAT = ['Materiale didattico', 'Affitto / Utenze', 'Cancelleria e stampe', 'Manutenzione strumenti', 'SIAE / Diritti', 'Spese bancarie', 'Varie'];
 const ENTRATE_CAT = ['Quota iscrizione annuale', 'Saggio / Concerto', 'Donazione / Contributo', 'Rimborso', 'Varie'];
-const APP_VERSION = '3.2';
+const APP_VERSION = '3.2.1';
 
 function renderPwaQrBox() {
   return `
@@ -101,8 +101,17 @@ const schoolYearLabel = () => {
 };
 
 const giornoIdx = s => { const i = GIORNI.indexOf(s.giorno); return i < 0 ? 99 : i; };
+const timeSortVal = v => { const m = parseTimeMinutes(v); return m === null ? 9999 : m; };
+const normalizeTimeValue = str => {
+  if (!str) return '';
+  const m = String(str).match(/(\d{1,2})[:.](\d{2})/);
+  if (!m) return '';
+  const h = Math.min(23, Math.max(0, Number(m[1])));
+  const min = Math.min(59, Math.max(0, Number(m[2])));
+  return `${pad(h)}:${pad(min)}`;
+};
 const sorted = list => [...list].sort((a, b) => (giornoIdx(a) - giornoIdx(b))
-  || String(a.orario || '').localeCompare(String(b.orario || '')) || fullName(a).localeCompare(fullName(b)));
+  || (timeSortVal(a.orario) - timeSortVal(b.orario)) || fullName(a).localeCompare(fullName(b)));
 const field = (label, name, val, attrs = '') => `<label>${label}<input name="${name}" value="${esc(val)}" ${attrs}></label>`;
 const opt = (v, sel, label = v) => `<option value="${esc(v)}" ${String(v) === String(sel) ? 'selected' : ''}>${esc(label)}</option>`;
 
@@ -1140,7 +1149,7 @@ function studentDialog(id) {
       </label>
       <label>Stato<select name="stato">${['Attivo', 'Sospeso', 'Ritirato'].map(x => opt(x, s.stato)).join('')}</select></label>
       <label>Giorno lezione<select name="giorno"><option value="">—</option>${GIORNI.map(x => opt(x, s.giorno)).join('')}</select></label>
-      ${field('Orario', 'orario', s.orario, 'placeholder="es. 16:00 – 16:45"')}
+      ${field('Orario', 'orario', normalizeTimeValue(s.orario), 'type="time"')}
       ${field('Email', 'email', s.email, 'type="email"')}
       ${field('Telefono', 'telefono', s.telefono, 'type="tel"')}
       ${field('Intestatario ricevuta (es. genitore)', 'intestatario', s.intestatario, 'placeholder="Se vuoto: nome dell\'allievo"')}
@@ -1629,7 +1638,7 @@ function recoveryDialog(prefill = {}) {
       </label>
       <div class="grid2">
         ${field('Data del recupero', 'date', dateVal, `type="date" min="${start}" max="${end}" required id="rec-dlg-date"`)}
-        ${field('Orario della lezione', 'orario', orarioVal, 'placeholder="es. 16:00 – 16:45" id="rec-dlg-orario"')}
+        ${field('Orario della lezione', 'orario', normalizeTimeValue(orarioVal), 'type="time" id="rec-dlg-orario"')}
       </div>
       <label>Al posto di un allievo assente? (facoltativo)
         <select name="sostituisceStudentId" id="rec-dlg-sostituisce">
@@ -1664,7 +1673,7 @@ function recoveryDialog(prefill = {}) {
     sostSel.addEventListener('change', () => {
       const absentStud = studentById(sostSel.value);
       if (absentStud) {
-        if (absentStud.orario && orarioInp) orarioInp.value = absentStud.orario;
+        if (absentStud.orario && orarioInp) orarioInp.value = normalizeTimeValue(absentStud.orario);
         if (noteInp && (!noteInp.value || noteInp.value.startsWith('Al posto di '))) {
           noteInp.value = `Al posto di ${fullName(absentStud)} (assente)`;
         }
@@ -1688,7 +1697,7 @@ function recoveryViewDialog(recId) {
       </div>
       <div class="grid2">
         ${field('Data del recupero', 'date', rec.date, `type="date" min="${start}" max="${end}" required`)}
-        ${field('Orario', 'orario', rec.orario || '', 'placeholder="es. 16:00 – 16:45" id="rec-edit-orario"')}
+        ${field('Orario', 'orario', normalizeTimeValue(rec.orario || ''), 'type="time" id="rec-edit-orario"')}
       </div>
       <label>Al posto di un allievo assente? (facoltativo)
         <select name="sostituisceStudentId" id="rec-edit-sostituisce">
@@ -1723,7 +1732,7 @@ function recoveryViewDialog(recId) {
     sostSel.addEventListener('change', () => {
       const absentStud = studentById(sostSel.value);
       if (absentStud) {
-        if (absentStud.orario && orarioInp && !orarioInp.value) orarioInp.value = absentStud.orario;
+        if (absentStud.orario && orarioInp && !orarioInp.value) orarioInp.value = normalizeTimeValue(absentStud.orario);
         if (noteInp && (!noteInp.value || noteInp.value.startsWith('Al posto di '))) {
           noteInp.value = `Al posto di ${fullName(absentStud)} (assente)`;
         }
@@ -1887,7 +1896,7 @@ function compactDaySlots(slots, dStr = null, defaultStartMins = null, duration =
 
   confirmed.forEach((s) => {
     const oldOrario = s.orario;
-    const newOrario = makeSlotRange(currentMins, duration);
+    const newOrario = formatMinutesToTime(currentMins);
     const newStartMins = currentMins;
     s.orario = newOrario;
     currentMins += duration;
@@ -1977,7 +1986,7 @@ function pickStudentForSlotDialog(dStr, suggestedTime = '') {
           </label>
           <div class="grid2" style="margin-top:12px;">
             <label>Orario Lezione:
-              <input type="text" id="pick-stud-time" value="${esc(suggestedTime)}" placeholder="es. 16:00 – 16:45" style="font-weight:700;">
+              <input type="time" id="pick-stud-time" value="${esc(normalizeTimeValue(suggestedTime))}" style="font-weight:700;">
             </label>
             <label>Stato Lezione:
               <select id="pick-stud-stato">
@@ -2018,7 +2027,7 @@ function pickStudentForSlotDialog(dStr, suggestedTime = '') {
       studSel.onchange = () => {
         const s = studentById(studSel.value);
         if (s && !suggestedTime && s.orario) {
-          timeInp.value = s.orario;
+          timeInp.value = normalizeTimeValue(s.orario);
         }
       };
     }
@@ -2036,7 +2045,7 @@ function pickStudentForSlotDialog(dStr, suggestedTime = '') {
         studentId: s.id,
         nome: fullName(s),
         strumento: s.strumento || '',
-        orario: timeInp.value.trim() || s.orario || '',
+        orario: normalizeTimeValue(timeInp.value) || normalizeTimeValue(s.orario) || '',
         stato: statoSel.value,
         tipo: 'manuale',
         note: noteInp.value.trim()
@@ -2182,7 +2191,7 @@ async function openWeeklyScheduleDialog(initialWeekStart = null) {
                         <button type="button" class="btn icon small" data-ws-act="move-down" data-date="${dStr}" data-idx="${idx}" ${idx === slots.length - 1 ? 'disabled' : ''} title="Sposta giù" style="padding:2px 5px;font-size:10px;">▼</button>
                       </td>
                       <td>
-                        <input type="text" class="ws-input-orario" data-date="${dStr}" data-idx="${idx}" value="${esc(s.orario || '')}" placeholder="es. 16:00 – 16:45" style="font-weight:700;font-size:13px;padding:5px 8px;border-radius:6px;width:100%;">
+                        <input type="time" class="ws-input-orario" data-date="${dStr}" data-idx="${idx}" value="${esc(normalizeTimeValue(s.orario || ''))}" style="font-weight:700;font-size:13px;padding:5px 8px;border-radius:6px;width:100%;">
                       </td>
                       <td>
                         <b>${esc(s.nome)}</b>
@@ -2309,6 +2318,19 @@ async function openWeeklyScheduleDialog(initialWeekStart = null) {
       renderBody();
       toast('⚡ Orari compattati a 45 min per tutta la settimana! Controlla e salva.');
     };
+
+    $$('.ws-input-orario', dlg).forEach(inp => {
+      inp.onchange = () => {
+        const d = inp.dataset.date, i = Number(inp.dataset.idx);
+        const arr = currentSchedule.days[d];
+        if (arr?.[i]) {
+          arr[i].orario = inp.value;
+          updateSlotStatusAndNote(arr[i], d);
+          arr.sort((a, b) => timeSortVal(a.orario) - timeSortVal(b.orario) || String(a.nome || '').localeCompare(String(b.nome || '')));
+          renderBody();
+        }
+      };
+    });
   };
 
   dlg.onclick = async e => {
@@ -2377,12 +2399,13 @@ async function openWeeklyScheduleDialog(initialWeekStart = null) {
       }
       const dt = new Date(dStr.replace(/-/g, '/'));
       const defStart = dt.getDay() === 6 ? 9 * 60 : 16 * 60;
-      const sugTime = makeSlotRange(lastTimeMins !== null ? lastTimeMins : defStart, 45);
+      const sugTime = formatMinutesToTime(lastTimeMins !== null ? lastTimeMins : defStart);
 
       const newSlot = await pickStudentForSlotDialog(dStr, sugTime);
       if (newSlot) {
         currentSchedule.days[dStr] ||= [];
         currentSchedule.days[dStr].push(newSlot);
+        currentSchedule.days[dStr].sort((a, b) => timeSortVal(a.orario) - timeSortVal(b.orario) || String(a.nome || '').localeCompare(String(b.nome || '')));
         renderBody();
         toast(`Allievo ${newSlot.nome} aggiunto`);
       }

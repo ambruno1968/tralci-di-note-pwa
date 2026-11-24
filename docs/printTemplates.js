@@ -274,8 +274,9 @@ ${renderSettlementCard(p, st, 'scuola', 'Copia per la Segreteria')}
   function renderAttendanceSheetHtml(db, mese) {
     const [y, m] = (mese || ymd(new Date()).slice(0, 7)).split('-').map(Number);
     const gi = s => { const i = GIORNI.indexOf(s.giorno); return i < 0 ? 99 : i; };
+    const tm = str => { const mt = String(str || '').match(/(\d{1,2})[:.](\d{2})/); return mt ? Number(mt[1]) * 60 + Number(mt[2]) : 9999; };
     const studs = (db.students || []).filter(s => s.stato === 'Attivo').sort((a, b) => (gi(a) - gi(b))
-      || String(a.orario || '').localeCompare(String(b.orario || '')) || fullName(a).localeCompare(fullName(b)));
+      || (tm(a.orario) - tm(b.orario)) || fullName(a).localeCompare(fullName(b)));
     const recs = db.recoveries || [];
     const recDates = new Set(recs.map(r => r.date));
     const wds = new Set(studs.map(s => WD[s.giorno]).filter(x => x !== undefined));
@@ -321,11 +322,12 @@ ${renderSettlementCard(p, st, 'scuola', 'Copia per la Segreteria')}
     const st = db.settings || {};
     const daysObj = schedule?.days || {};
     const daysKeys = Object.keys(daysObj).sort().filter(d => (daysObj[d] || []).length > 0);
+    const tm = str => { const mt = String(str || '').match(/(\d{1,2})[:.](\d{2})/); return mt ? Number(mt[1]) * 60 + Number(mt[2]) : 9999; };
     const sections = daysKeys.map(dStr => {
       const [y, m, d] = dStr.split('-').map(Number);
       const dt = new Date(y, m - 1, d);
       const label = `${WD_NAMES[dt.getDay()]} ${d} ${MESI[m - 1]} ${y}`.toUpperCase();
-      const slots = daysObj[dStr] || [];
+      const slots = [...(daysObj[dStr] || [])].sort((a, b) => (tm(a.orario) - tm(b.orario)) || String(a.nome || '').localeCompare(String(b.nome || '')));
       return `<div style="margin-bottom:18px;page-break-inside:avoid">
         <div style="background:#f1f5f9;border:1px solid #cbd5e1;border-bottom:0;padding:6px 12px;font-weight:bold;font-size:13px">📅 ${esc(label)} (${slots.length} lezioni)</div>
         <table width="100%" style="border-collapse:collapse;font-size:12px">

@@ -336,7 +336,11 @@
         addedStudIds.add(r.studentId);
       });
 
-      daySlots.sort((a, b) => String(a.orario || '').localeCompare(String(b.orario || '')));
+      const timeMins = str => {
+        const m = String(str || '').match(/(\d{1,2})[:.](\d{2})/);
+        return m ? Number(m[1]) * 60 + Number(m[2]) : 9999;
+      };
+      daySlots.sort((a, b) => (timeMins(a.orario) - timeMins(b.orario)) || String(a.nome || '').localeCompare(String(b.nome || '')));
       if (daySlots.length > 0) {
         days[dStr] = daySlots;
       }
@@ -350,8 +354,18 @@
     const smtp = { ...db.settings.smtp, pass: '', hasPass: !!db.settings.smtp?.pass };
     return {
       ...db,
-      version: '3.2',
+      version: '3.2.1',
       changelog: [
+        {
+          version: '3.2.1',
+          date: '2026-11-24',
+          title: 'Versione 3.2.1 — Campo Orario (HH:MM), Ordinamento & Aggiornamento Foglio Presenze',
+          changes: [
+            'Campo Orario convertito in selettore ora standard (HH:MM) in anagrafica allievi, recuperi e prospetto settimanale',
+            'Ordinamento sempre crescente per orario e data in anagrafica, calendario presenze, prospetto settimanale e stampe',
+            'Aggiornamento automatico del foglio presenze settimanale alla modifica di giorno, orario o stato di uno studente'
+          ]
+        },
         {
           version: '3.2',
           date: '2026-11-24',
@@ -416,11 +430,111 @@
     'email', 'telefono', 'intestatario', 'retta', 'stato', 'note', 'dataIscrizione'
   ];
 
+  function normalizeTimeValue(str) {
+    if (!str) return '';
+    const m = String(str).match(/(\d{1,2})[:.](\d{2})/);
+    if (!m) return String(str).trim();
+    const h = Math.min(23, Math.max(0, Number(m[1])));
+    const min = Math.min(59, Math.max(0, Number(m[2])));
+    return `${pad(h)}:${pad(min)}`;
+  }
+
+  function parseTimeSortVal(str) {
+    const m = String(str || '').match(/(\d{1,2})[:.](\d{2})/);
+    return m ? Number(m[1]) * 60 + Number(m[2]) : 9999;
+  }
+
+  function sortScheduleDays(daysObj) {
+    if (!daysObj || typeof daysObj !== 'object') return {};
+    const out = {};
+    for (const dStr of Object.keys(daysObj).sort()) {
+      const arr = Array.isArray(daysObj[dStr]) ? [...daysObj[dStr]] : [];
+      arr.sort((a, b) => (parseTimeSortVal(a.orario) - parseTimeSortVal(b.orario)) || String(a.nome || '').localeCompare(String(b.nome || '')));
+      if (arr.length > 0) out[dStr] = arr;
+    }
+    return out;
+  }
+
+  function syncStudentToWeeklySchedules(student, deletedId = null) {
+    if (!db.weeklySchedules || typeof db.weeklySchedules !== 'object') return;
+    const curMonday = getMondayOfDate(today());
+    const targetId = deletedId || student?.id;
+    if (!targetId) return;
+
+    for (const [ws, sched] of Object.entries(db.weeklySchedules)) {
+      if (!sched || !sched.days) continue;
+      const isCurrentOrFuture = ws >= curMonday;
+
+      for (const dStr of Object.keys(sched.days)) {
+        const arr = sched.days[dStr] || [];
+        if (deletedId) {
+          sched.days[dStr] = arr.filter(slot => slot.studentId !== targetId);
+          continue;
+        }
+        for (const slot of arr) {
+          if (slot.studentId !== targetId) continue;
+          slot.nome = fullName(student);
+          slot.strumento = student.strumento || '';
+          slot.telefono = student.telefono || '';
+          slot.email = student.email || '';
+          if (isCurrentOrFuture && slot.tipo === 'regolare' && slot.stato !== 'SPOSTATO') {
+            slot.orario = student.orario || '';
+          }
+        }
+        if (isCurrentOrFuture) {
+          // Rimuovi slot regolari se studente non più attivo o giorno cambiato
+          sched.days[dStr] = arr.filter(slot => {
+            if (slot.studentId !== targetId || slot.tipo !== 'regolare') return true;
+            if (student.stato !== 'Attivo') return false;
+            const [y, m, d] = dStr.split('-').map(Number);
+            const wdIndex = new Date(y, m - 1, d).getDay();
+            return WD[student.giorno] === wdIndex;
+          });
+        }
+      }
+
+      if (!deletedId && isCurrentOrFuture && student.stato === 'Attivo' && WD[student.giorno] !== undefined) {
+        const targetWd = WD[student.giorno];
+        const weekDates = getWeekDates(ws);
+        const matchDate = weekDates.find(dStr => {
+          const [y, m, d] = dStr.split('-').map(Number);
+          return new Date(y, m - 1, d).getDay() === targetWd;
+        });
+        if (matchDate) {
+          sched.days[matchDate] ||= [];
+          const hasReg = sched.days[matchDate].some(slot => slot.studentId === targetId && slot.tipo === 'regolare');
+          if (!hasReg) {
+            const attVal = (db.attendance || {})[`${targetId}|${matchDate}`] || '';
+            let stato = 'CONFERMATO';
+            if (attVal === 'A' || attVal === 'G') stato = 'ASSENTE';
+            else if (attVal === 'R' || attVal === 'REC') stato = 'RECUPERO';
+            sched.days[matchDate].push({
+              id: uid(),
+              studentId: targetId,
+              nome: fullName(student),
+              strumento: student.strumento || '',
+              orario: student.orario || '',
+              telefono: student.telefono || '',
+              email: student.email || '',
+              stato,
+              tipo: 'regolare',
+              note: stato === 'ASSENTE' ? 'Assenza registrata' : ''
+            });
+          }
+        }
+      }
+
+      sched.days = sortScheduleDays(sched.days);
+    }
+  }
+
   function pickStudent(body = {}) {
     const o = {};
     for (const f of STUDENT_FIELDS) {
       if (!(f in body)) continue;
-      o[f] = f === 'retta' ? round2(body[f] || 0) : String(body[f] ?? '').trim();
+      if (f === 'retta') o[f] = round2(body[f] || 0);
+      else if (f === 'orario') o[f] = normalizeTimeValue(body[f]);
+      else o[f] = String(body[f] ?? '').trim();
     }
     return o;
   }
@@ -532,6 +646,7 @@
       const s = { id: uid(), stato: 'Attivo', retta: db.settings.rettaDefault || 60, ...pickStudent(body) };
       if (!s.nome) throw new Error('Il nome è obbligatorio');
       db.students.push(s);
+      syncStudentToWeeklySchedules(s);
       save();
       return s;
     }
@@ -542,6 +657,7 @@
       const upd = pickStudent(body);
       if ('nome' in upd && !upd.nome) throw new Error('Il nome è obbligatorio');
       Object.assign(s, upd);
+      syncStudentToWeeklySchedules(s);
       save();
       return s;
     }
@@ -553,6 +669,7 @@
       for (const k of Object.keys(db.attendance)) {
         if (k.startsWith(id + '|')) delete db.attendance[k];
       }
+      syncStudentToWeeklySchedules(null, id);
       save();
       return { ok: true };
     }
@@ -755,14 +872,16 @@
     if (pathname === '/api/weekly-schedule' && method === 'GET') {
       const weekStart = query.get('weekStart') || getMondayOfDate(today());
       const saved = db.weeklySchedules[weekStart];
-      const schedule = saved || buildDefaultWeekSchedule(weekStart);
+      const schedule = saved
+        ? { ...saved, days: sortScheduleDays(saved.days) }
+        : buildDefaultWeekSchedule(weekStart);
       return { weekStart, schedule, isCustom: !!saved };
     }
     if (pathname === '/api/weekly-schedule' && method === 'POST') {
       if (!body.weekStart) throw new Error('Data inizio settimana obbligatoria');
       db.weeklySchedules[body.weekStart] = {
         weekStart: body.weekStart,
-        days: body.days || {},
+        days: sortScheduleDays(body.days || {}),
         note: body.note || '',
         aggiornato: new Date().toISOString()
       };
