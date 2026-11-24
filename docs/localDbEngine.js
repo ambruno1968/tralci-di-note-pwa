@@ -354,8 +354,17 @@
     const smtp = { ...db.settings.smtp, pass: '', hasPass: !!db.settings.smtp?.pass };
     return {
       ...db,
-      version: '3.2.1',
+      version: '3.2.2',
       changelog: [
+        {
+          version: '3.2.2',
+          date: '2026-11-24',
+          title: 'Versione 3.2.2 — Stampa Presenze con Recuperi nello Stesso Giorno (P + REC)',
+          changes: [
+            'Risolta la mancata stampa del badge REC e relativo orario quando un allievo svolge un recupero nello stesso giorno della lezione ordinaria',
+            'Allineato il conteggio totale delle presenze (Pres.) in stampa con la visualizzazione a calendario'
+          ]
+        },
         {
           version: '3.2.1',
           date: '2026-11-24',

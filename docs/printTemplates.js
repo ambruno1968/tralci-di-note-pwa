@@ -302,9 +302,17 @@ ${renderSettlementCard(p, st, 'scuola', 'Copia per la Segreteria')}
         const v = (isLessonDay && rec && (!rawV || rawV === 'REC')) ? 'P' : rawV;
         if (!isLessonDay && !v && !rec) return '<td style="background:#f8fafc"></td>';
         if (!v && !rec && closed.has(c.date)) return '<td style="background:#e2e8f0">–</td>';
-        if (v === 'P' || rec || (!isLessonDay && v === 'REC')) P++;
+        if (v === 'P') P++;
         if (v === 'A') A++;
-        return `<td><b>${esc(v || (rec ? 'REC' : ''))}</b></td>`;
+        if (rec) P++;
+        else if (!isLessonDay && v === 'REC') P++;
+        if (isLessonDay && rec) {
+          return `<td style="background:#f0f9ff"><b>${esc(v || 'P')}</b>+<span style="display:inline-block;background:#0284c7;color:#fff;font-size:9px;padding:1px 3px;border-radius:3px;font-weight:bold">REC</span>${rec.orario ? `<br><small style="color:#0369a1;font-size:8.5px">${esc(rec.orario)}</small>` : ''}</td>`;
+        }
+        if (rec) {
+          return `<td style="background:#e0f2fe"><span style="display:inline-block;background:#0284c7;color:#fff;font-size:9px;padding:1px 3px;border-radius:3px;font-weight:bold">REC</span>${rec.orario ? `<br><small style="color:#0369a1;font-size:8.5px">${esc(rec.orario)}</small>` : ''}</td>`;
+        }
+        return `<td><b>${esc(v)}</b></td>`;
       }).join('');
       return `<tr><td>${i + 1}</td><td style="text-align:left"><b>${esc(fullName(s))}</b><br><small style="color:#64748b">${esc(s.strumento)} · ${esc(s.giorno)} ${esc(s.orario)}</small></td>${cells}<td><b>${P}</b></td><td><b>${A}</b></td></tr>`;
     }).join('');
