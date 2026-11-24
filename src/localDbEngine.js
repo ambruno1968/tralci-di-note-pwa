@@ -350,8 +350,18 @@
     const smtp = { ...db.settings.smtp, pass: '', hasPass: !!db.settings.smtp?.pass };
     return {
       ...db,
-      version: '3.1',
+      version: '3.2',
       changelog: [
+        {
+          version: '3.2',
+          date: '2026-11-24',
+          title: 'Versione 3.2 — QR Code PWA nei Credits & Volantino Scaricabile',
+          changes: [
+            'Inserito il QR Code ufficiale della PWA nei Credits (Impostazioni e Guida) per l\'apertura e installazione rapida da smartphone e tablet',
+            'Aggiunto il download diretto del QR Code brandizzato e del volantino stampabile in alta risoluzione (PNG)',
+            'Aggiornamento cache Service Worker e risorse statiche alla versione 3.2.0'
+          ]
+        },
         {
           version: '3.1',
           date: '2026-11-18',

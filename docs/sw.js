@@ -1,9 +1,10 @@
 /* Service worker di Tralci di note: funzionamento offline dell'app. */
-const CACHE = 'tralci-di-note-v3.1.0';
+const CACHE = 'tralci-di-note-v3.2.0';
 const SHELL = [
   './', 'index.html', 'styles.css', 'app.js', 'pwa.js', 'localDbEngine.js', 'driveClient.js',
   'printTemplates.js', 'default-db.json', 'WIKI.md', 'logo.png', 'icon.png',
-  'icon-192.png', 'icon-512.png', 'manifest.webmanifest'
+  'icon-192.png', 'icon-512.png', 'qrcode.png', 'qrcode.svg', 'qrcode-brand.png', 'qrcode-flyer.png',
+  'manifest.webmanifest'
 ];
 
 self.addEventListener('install', e => {

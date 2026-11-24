@@ -15,7 +15,24 @@ const getStrumenti = () => (Array.isArray(S?.settings?.strumenti) && S.settings.
 const METODI = ['Contanti', 'Bonifico bancario', 'POS / Carta', 'Satispay', 'Assegno', 'Altro'];
 const SPESE_CAT = ['Materiale didattico', 'Affitto / Utenze', 'Cancelleria e stampe', 'Manutenzione strumenti', 'SIAE / Diritti', 'Spese bancarie', 'Varie'];
 const ENTRATE_CAT = ['Quota iscrizione annuale', 'Saggio / Concerto', 'Donazione / Contributo', 'Rimborso', 'Varie'];
-const APP_VERSION = '3.0';
+const APP_VERSION = '3.2';
+
+function renderPwaQrBox() {
+  return `
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;background:#f0fdfa;border:1px solid #99f6e4;border-radius:10px;padding:14px 16px;margin:14px auto 0 auto;max-width:680px;text-align:left;">
+      <img src="qrcode-brand.png" alt="QR Code PWA Tralci di Note" style="width:104px;height:104px;border-radius:10px;background:#fff;padding:4px;border:1px solid #cbd5e1;flex-shrink:0;">
+      <div style="flex:1;min-width:210px;">
+        <div style="font-weight:700;color:#0b545d;font-size:14px;margin-bottom:4px;">📱 Installa l'App PWA tramite QR Code</div>
+        <div style="font-size:12.5px;color:#334155;line-height:1.45;margin-bottom:10px;">
+          Inquadra il QR code con la fotocamera dello smartphone o tablet per aprire <b>Tralci di Note</b> e aggiungerlo alla schermata Home.
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="qrcode-brand.png" download="qrcode-tralci-di-note.png" class="btn small primary">⬇️ Scarica QR (PNG)</a>
+          <a href="qrcode-flyer.png" download="volantino-tralci-di-note.png" class="btn small">🖨️ Scarica Volantino (PNG)</a>
+        </div>
+      </div>
+    </div>`;
+}
 const PRES = {
   P: { label: 'Presente', cls: 'p' },
   A: { label: 'Assente', cls: 'a' },
@@ -3424,6 +3441,7 @@ function viewImpostazioni() {
     <div style="text-align:center;margin-top:24px;padding:12px;color:var(--muted);font-size:12px;line-height:1.6;">
       <b>Tralci di Note</b> · Sviluppato da Bruno Astemio con Antigravity per Come Tralci - Novara<br>
       <span style="font-size:11px;color:#94a3b8;">Chiesa Evangelica Pentecostale e Missionaria Come Tralci - Novara</span>
+      ${renderPwaQrBox()}
     </div>
   </form>`;
 }
@@ -3702,6 +3720,7 @@ function viewGuida() {
       Il gestionale è sviluppato e curato da <b>Bruno Astemio</b> con <b>Antigravity</b> per <i>Come Tralci - Novara</i>.<br>
       Documento tecnico persistente: <span class="code-inline">WIKI.md</span> nella cartella principale del gestionale.
     </p>
+    ${renderPwaQrBox()}
   </div>`;
 }
 
